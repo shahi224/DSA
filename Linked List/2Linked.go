@@ -37,7 +37,7 @@ func (d *DoublyLinkedList) InsertAtTail(value int) {
 		d.tail = NewNode
 	} else {
 		NewNode.prev = d.tail
-		d.tail.next = NewNode // ✅ correct
+		d.tail.next = NewNode
 		d.tail = NewNode
 	}
 }
@@ -104,6 +104,14 @@ func (d *DoublyLinkedList) Reverse() {
 	}
 }
 
+func ArrayToDoublyLinkedList(arr []int) *DoublyLinkedList {
+	list := &DoublyLinkedList{}
+	for _, val := range arr {
+		list.InsertAtTail(val)
+	}
+	return list
+}
+
 // display the list
 func (d *DoublyLinkedList) Display() {
 	current := d.head
@@ -139,11 +147,12 @@ func (d *DoublyLinkedList) Search(value int) bool {
 }
 
 func main() {
-	d := &DoublyLinkedList{}
+	arr := []int{50, 60, 70}
+	d := ArrayToDoublyLinkedList(arr)
 	d.InsertAtHead(10)
 	d.InsertAtHead(20)
-	d.InsertAtTail(60)
-	d.InsertAtTail(70)
+	// d.InsertAtTail(60)
+	// d.InsertAtTail(70)
 	d.InsertAtHead(30)
 	d.InsertAtHead(40)
 	fmt.Println("Doubly linked list:")
@@ -153,7 +162,10 @@ func main() {
 	d.DisplayBackward()
 	d.DeleteByValue(20)
 	fmt.Println("After deleting by value 20:")
-	d.DisplayBackward()
+	d.DeleteByPosition(2)
+	fmt.Println("After deleting by position 3:")
+	d.Display()
+	// d.DisplayBackward()
 	fmt.Println("search 30:", d.Search(30))
 
 }
