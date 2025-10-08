@@ -145,6 +145,24 @@ func (d *DoublyLinkedList) Search(value int) bool {
 	}
 	return false
 }
+func (d *DoublyLinkedList) RemoveDuplicateSorted() {
+	current := d.head
+
+	for current != nil && current.next != nil {
+		if current.data == current.next.data {
+			// Duplicate found → remove next node
+			duplicate := current.next
+			current.next = duplicate.next
+			if duplicate.next != nil {
+				duplicate.next.prev = current
+			} else {
+				d.tail = current // update tail if last node was removed
+			}
+		} else {
+			current = current.next
+		}
+	}
+}
 
 func main() {
 	arr := []int{50, 60, 70}
@@ -165,7 +183,6 @@ func main() {
 	d.DeleteByPosition(2)
 	fmt.Println("After deleting by position 3:")
 	d.Display()
-	// d.DisplayBackward()
 	fmt.Println("search 30:", d.Search(30))
 
 }
