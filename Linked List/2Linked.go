@@ -184,5 +184,9 @@ func main() {
 	fmt.Println("After deleting by position 3:")
 	d.Display()
 	fmt.Println("search 30:", d.Search(30))
+	d.RemoveDuplicateSorted()
+
+	fmt.Println("After removing duplicates (sorted):")
+	d.Display()
 
 }
